@@ -1,0 +1,42 @@
+CREATE DATABASE IF NOT EXISTS helpdesk;
+
+USE helpdesk;
+
+CREATE TABLE IF NOT EXISTS clientes(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    telefone VARCHAR(15),
+    endereco TEXT,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS usuarios(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    FOREIGN KEY(cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS chamados(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    titulo VARCHAR(255) NOT NULL,
+    descricao TEXT NOT NULL,
+    status ENUM('Aberto', 'Em andamento', 'Fechado') DEFAULT 'Aberto',
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS resposta_chamados(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    chamado_id INT NOT NULL,
+    cliente_id INT NOT NULL,
+    mensagem TEXT NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+	FOREIGN KEY(chamado_id) REFERENCES chamados(id) ON DELETE CASCADE
+
+);

@@ -1,0 +1,24 @@
+{
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontSize": 14,
+    "editor.lineHeight": 1.8,
+    "editor.rulers": [120, 140],
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.renderLineHighlight": "gutter",
+    "editor.fontLigatures": true,
+    "workbench.editor.labelFormat": "short",
+    "explorer.compactFolders": false,
+    "breadcrumbs.enabled": false,
+    "apc.electron": {
+        "titleBarStyle": "hiddenInset"
+    },
+    "apc.stylesheet": {
+        ".title-label > h2": "display: none",
+        ".pane-body": "padding: 8px",
+        ".pane.header": "padding: 0 8px"
+    },
+    "apc.listRow": {
+        "height": 24
+    }
+
+}
